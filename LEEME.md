@@ -8,7 +8,8 @@ de Holded.
 - Firebase Authentication: acceso con Google.
 - Cloud Firestore: facturas y fichas de clientes.
 - Firebase Hosting: publicacion web.
-- Seguridad por usuario: cada cuenta ve unicamente sus datos.
+- Espacio compartido: todos los usuarios autenticados ven los mismos datos.
+- Sincronizacion en tiempo real entre usuarios.
 
 ## Puesta en marcha
 

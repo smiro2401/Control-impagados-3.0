@@ -161,6 +161,7 @@ import {
   doc,
   getDocs,
   getFirestore,
+  onSnapshot,
   setDoc,
   writeBatch
 } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
@@ -177,6 +178,17 @@ const app=$('#app');
 
 let invoices=[], clients={}, q='', sortBy='deuda', sortDir=-1;
 let auth=null, db=null, user=null;
+let stopInvoices=null, stopClients=null;
+const SHARED_WORKSPACE='control-impagados';
+
+const invoicesRef=()=>collection(db,'workspaces',SHARED_WORKSPACE,'invoices');
+const clientsRef=()=>collection(db,'workspaces',SHARED_WORKSPACE,'clients');
+
+function stopRealtime(){
+  if(stopInvoices)stopInvoices();
+  if(stopClients)stopClients();
+  stopInvoices=null; stopClients=null;
+}
 
 function statusOf(d){ if(d>=90) return 'crit'; if(d>=30) return 'mora'; return 'pend'; }
 const STLABEL={crit:'Crítico',mora:'Mora',pend:'Pendiente'};
@@ -201,6 +213,7 @@ async function boot(){
   auth = getAuth(firebaseApp);
   db = getFirestore(firebaseApp);
   onAuthStateChanged(auth,async currentUser=>{
+    stopRealtime();
     user=currentUser;
     if(user) await afterLogin(); else renderLogin();
   });
@@ -210,14 +223,15 @@ async function afterLogin(){
   app.innerHTML='<div class="loading">Cargando datos…</div>';
   await loadData();
   render();
+  startRealtime();
 }
 
 async function loadData(){
   invoices=[]; clients={};
   try{
-    const inv = await getDocs(collection(db,'users',user.uid,'invoices'));
+    const inv = await getDocs(invoicesRef());
     invoices = inv.docs.map(snapshot=>snapshot.data());
-    const cl = await getDocs(collection(db,'users',user.uid,'clients'));
+    const cl = await getDocs(clientsRef());
     cl.forEach(snapshot=>{
       const data=snapshot.data();
       clients[data.clientKey]=data.profile;
@@ -225,8 +239,23 @@ async function loadData(){
   }catch(e){ console.error('loadData',e); }
 }
 
+function startRealtime(){
+  stopInvoices=onSnapshot(invoicesRef(),snapshot=>{
+    invoices=snapshot.docs.map(item=>item.data());
+    render();
+  },error=>console.error('invoices realtime',error));
+  stopClients=onSnapshot(clientsRef(),snapshot=>{
+    clients={};
+    snapshot.forEach(item=>{
+      const data=item.data();
+      clients[data.clientKey]=data.profile;
+    });
+    render();
+  },error=>console.error('clients realtime',error));
+}
+
 async function replaceInvoices(list){
-  const ref=collection(db,'users',user.uid,'invoices');
+  const ref=invoicesRef();
   const existing=await getDocs(ref);
   for(let i=0;i<existing.docs.length;i+=400){
     const batch=writeBatch(db);
@@ -242,7 +271,7 @@ async function replaceInvoices(list){
 
 async function saveClient(k,obj){
   await setDoc(
-    doc(db,'users',user.uid,'clients',encodeURIComponent(k)),
+    doc(clientsRef(),encodeURIComponent(k)),
     {clientKey:k,profile:obj,updatedAt:new Date().toISOString()}
   );
 }

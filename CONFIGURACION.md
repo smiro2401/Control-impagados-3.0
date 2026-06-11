@@ -1,8 +1,8 @@
 # Configuracion de Firebase
 
 La aplicacion usa Firebase Authentication con Google, Cloud Firestore para los
-datos y Firebase Hosting para publicarla. Cada cuenta de Google solo puede
-leer y modificar sus propios datos.
+datos y Firebase Hosting para publicarla. Todos los usuarios autenticados
+comparten la misma cartera de facturas y fichas de clientes.
 
 ## 1. Crear el proyecto
 
@@ -36,8 +36,8 @@ Cuando uses un dominio propio, agregalo tambien en **Authentication** >
 2. Elige una region europea cercana.
 3. Puedes iniciar en modo produccion.
 
-Las reglas incluidas en `firestore.rules` hacen que cada usuario solo pueda
-acceder a la ruta asociada a su identificador de Google.
+Las reglas incluidas en `firestore.rules` permiten que todos los usuarios
+autenticados accedan al espacio compartido de Control de Impagados.
 
 ## 5. Instalar Firebase CLI
 
@@ -79,8 +79,8 @@ Tambien puedes usar cualquier servidor estatico local.
 
 ## Datos
 
-- Facturas: `users/{uid}/invoices`
-- Fichas: `users/{uid}/clients`
+- Facturas: `workspaces/control-impagados/invoices`
+- Fichas: `workspaces/control-impagados/clients`
 
-Cada nueva importacion de Excel reemplaza las facturas del usuario actual.
-Las fichas de clientes se conservan.
+Cada nueva importacion de Excel reemplaza las facturas compartidas. Las fichas
+de clientes se conservan y los cambios se sincronizan en tiempo real.
