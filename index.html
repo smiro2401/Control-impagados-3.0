@@ -9,36 +9,39 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
 :root{
-  --navy:#0F1E3C; --navy2:#16294f; --panel:#FFFFFF; --bg:#F8FAFF;
-  --ink:#1a2438; --muted:#6b7896; --line:#e4e9f5; --line2:#eef2fb;
-  --red:#E53E3E; --amber:#F6AD55; --green:#38A169; --blue:#3b6fe0;
-  --crit:#E53E3E; --mora:#F6AD55; --pend:#3b6fe0;
+  --navy:#0B3370; --navy2:#001D45; --panel:#FFFFFF; --bg:#F5F6F8;
+  --ink:#101828; --muted:#667085; --line:#D8E1EC; --line2:#EEF2F6;
+  --red:#E5484D; --amber:#F59E0B; --green:#22A559; --blue:#1469E6;
+  --crit:#E5484D; --mora:#F59E0B; --pend:#1469E6;
 }
 *{box-sizing:border-box} html,body{margin:0; padding:0; background:var(--bg)}
-#app{font-family:'Inter',system-ui,sans-serif; color:var(--ink); background:var(--bg); margin:0 auto; max-width:1240px; padding:0 0 60px; min-height:100vh}
-.head{background:linear-gradient(120deg,var(--navy),var(--navy2)); color:#fff; padding:26px 30px 30px; border-radius:0 0 22px 22px}
+#app{font-family:'Inter',system-ui,sans-serif; color:var(--ink); background:var(--bg); margin:0 auto; max-width:1440px; padding:0 0 60px; min-height:100vh}
+.head{background:var(--navy); color:#fff; padding:22px 34px 26px; border-bottom:4px solid var(--blue)}
 .head .top{display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap}
-.head h1{font-family:'Space Grotesk',sans-serif; font-size:23px; font-weight:700; margin:0; letter-spacing:-.4px}
-.head .sub{color:#a9b8df; font-size:13px; margin:3px 0 0}
+.head-brand{display:flex; align-items:center; gap:20px}
+.head-brand img{width:104px; height:auto; flex:0 0 auto}
+.head-brand-copy{padding-left:20px; border-left:1px solid rgba(255,255,255,.25)}
+.head h1{font-family:'Inter',sans-serif; font-size:22px; font-weight:650; margin:0; letter-spacing:-.3px}
+.head .sub{color:#B8C9E4; font-size:13px; margin:4px 0 0}
 .tools{display:flex; gap:9px; flex-wrap:wrap; align-items:center}
-.uemail{color:#a9b8df; font-size:12px; margin-right:4px}
-.btn{font-family:inherit; border:0; border-radius:10px; padding:10px 16px; font-size:13.5px; font-weight:600; cursor:pointer; transition:.15s}
-.btn.primary{background:#fff; color:var(--navy)}
-.btn.primary:hover{background:#e9eefb}
-.btn.ghost{background:rgba(255,255,255,.12); color:#fff}
-.btn.ghost:hover{background:rgba(255,255,255,.22)}
+.uemail{color:#B8C9E4; font-size:12px; margin-right:4px}
+.btn{font-family:inherit; border:1px solid transparent; border-radius:8px; padding:10px 16px; font-size:13.5px; font-weight:600; cursor:pointer; transition:.15s}
+.btn.primary{background:var(--blue); border-color:var(--blue); color:#fff}
+.btn.primary:hover{background:#0F5DCC; border-color:#0F5DCC}
+.btn.ghost{background:transparent; border-color:rgba(255,255,255,.45); color:#fff}
+.btn.ghost:hover{background:rgba(255,255,255,.1); border-color:#fff}
 .btn.sm{padding:7px 13px; font-size:12.5px}
 .btn[disabled]{opacity:.5; cursor:default}
-.kpis{display:grid; grid-template-columns:repeat(5,1fr); gap:14px; margin-top:24px}
-.kpi{background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.13); border-radius:14px; padding:15px 16px}
+.kpis{display:grid; grid-template-columns:repeat(5,1fr); gap:1px; margin-top:22px; background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.18); border-radius:8px; overflow:hidden}
+.kpi{background:rgba(0,29,69,.32); border:0; border-radius:0; padding:16px 18px}
 .kpi .v{font-family:'Space Grotesk',sans-serif; font-size:25px; font-weight:700; line-height:1; letter-spacing:-.5px}
-.kpi .l{color:#a9b8df; font-size:11.5px; margin-top:7px; text-transform:uppercase; letter-spacing:.5px}
+.kpi .l{color:#B8C9E4; font-size:11px; margin-top:7px; text-transform:uppercase; letter-spacing:.55px}
 .kpi.alert .v{color:#ffb3b3}
 .kpi.amber .v{color:#ffd9a8}
 .kpi.kit .v{color:#9fe6c4}
-.wrap{padding:24px 30px 0}
-.section{background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:20px 22px; margin-bottom:20px; box-shadow:0 1px 3px rgba(15,30,60,.04)}
-.section h2{font-family:'Space Grotesk',sans-serif; font-size:15px; font-weight:600; margin:0 0 4px; display:flex; align-items:center; gap:8px}
+.wrap{padding:26px 34px 0}
+.section{background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:22px 24px; margin-bottom:20px; box-shadow:0 1px 2px rgba(16,24,40,.04)}
+.section h2{font-family:'Inter',sans-serif; font-size:16px; font-weight:650; margin:0 0 4px; display:flex; align-items:center; gap:8px}
 .section .desc{color:var(--muted); font-size:12.5px; margin:0 0 16px}
 .cols{display:grid; grid-template-columns:1.35fr 1fr; gap:20px}
 .rk{display:flex; flex-direction:column; gap:11px}
@@ -46,13 +49,13 @@
 .rkrow .pos{color:var(--muted); font-size:12px; font-weight:600; text-align:right}
 .rkrow .body{min-width:0}
 .rkrow .nm{font-size:12.5px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; margin-bottom:4px}
-.rkrow .track{height:9px; background:var(--line2); border-radius:5px; overflow:hidden}
-.rkrow .fill{height:100%; border-radius:5px}
+.rkrow .track{height:8px; background:#E8EDF3; border-radius:2px; overflow:hidden}
+.rkrow .fill{height:100%; border-radius:2px}
 .rkrow .val{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:13px; white-space:nowrap}
 .rkrow:hover .nm{color:var(--blue)}
 .bars{display:flex; align-items:flex-end; gap:10px; height:150px; padding-top:10px}
 .bc{flex:1; display:flex; flex-direction:column; align-items:center; gap:6px; height:100%; justify-content:flex-end}
-.bc .col{width:100%; max-width:46px; background:linear-gradient(180deg,#5b8def,#3b6fe0); border-radius:6px 6px 0 0; min-height:3px}
+.bc .col{width:100%; max-width:46px; background:linear-gradient(180deg,#3B82F6,#1469E6); border-radius:3px 3px 0 0; min-height:3px}
 .bc .cnt{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:13px}
 .bc .lbl{font-size:10px; color:var(--muted); text-align:center; line-height:1.2}
 .donut-wrap{display:flex; align-items:center; gap:18px}
@@ -63,17 +66,18 @@
 .dleg .di b{font-family:'Space Grotesk',sans-serif}
 .dleg .di span{color:var(--muted); margin-left:auto; padding-left:14px}
 .tbar{display:flex; gap:10px; margin-bottom:14px; flex-wrap:wrap; align-items:center}
-.search{flex:1; min-width:200px; border:1px solid var(--line); background:var(--bg); border-radius:10px; padding:10px 13px; font-size:13.5px; font-family:inherit; color:var(--ink)}
+.search{flex:1; min-width:200px; border:1px solid #C8D2DF; background:#fff; border-radius:8px; padding:10px 13px; font-size:13.5px; font-family:inherit; color:var(--ink)}
 .search:focus{outline:none; border-color:var(--blue)}
 table{width:100%; border-collapse:collapse}
-th{text-align:left; font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.5px; padding:9px 12px; border-bottom:2px solid var(--line); cursor:pointer; user-select:none; white-space:nowrap}
+th{text-align:left; font-size:11px; color:#344054; text-transform:uppercase; letter-spacing:.45px; padding:11px 12px; border:1px solid #D9E2EC; background:#fff; cursor:pointer; user-select:none; white-space:nowrap}
 th.r{text-align:right} th.c{text-align:center}
 th:hover{color:var(--blue)}
 th .ar{opacity:.5; font-size:9px}
-td{padding:11px 12px; border-bottom:1px solid var(--line2); font-size:13px}
+td{padding:11px 12px; border-right:1px solid #D9E2EC; border-bottom:1px solid #E7ECF2; font-size:13px}
 td.r{text-align:right} td.c{text-align:center}
 tr.trow{cursor:pointer}
-tr.trow:hover td{background:var(--bg)}
+tbody tr:nth-child(odd) td{background:#F7F8FA}
+tr.trow:hover td{background:#EAF2FF}
 .cname{font-weight:600; display:flex; align-items:center; gap:7px}
 .amt{font-family:'Space Grotesk',sans-serif; font-weight:700}
 .amt.big{color:var(--red)}
@@ -83,26 +87,26 @@ tr.trow:hover td{background:var(--bg)}
 .pill.pend{background:#e7eefc; color:var(--pend)}
 .ic{font-size:11px}
 .dot{width:7px; height:7px; border-radius:50%; display:inline-block; flex-shrink:0}
-.empty{text-align:center; color:var(--muted); padding:70px 20px; border:2px dashed var(--line); border-radius:16px; background:var(--panel)}
+.empty{text-align:center; color:var(--muted); padding:70px 20px; border:1px dashed #B7C4D4; border-radius:8px; background:var(--panel)}
 .empty .big{font-size:30px; margin-bottom:14px}
 .empty b{color:var(--ink)}
 .banner{background:#fff4e5; border:1px solid #f6c68a; color:#8a5a12; border-radius:12px; padding:14px 16px; margin:24px 30px 0; font-size:13px; line-height:1.5}
 .banner b{color:#6b430c}
 .banner code{background:#fce6c4; padding:1px 6px; border-radius:5px; font-size:12px}
 .ov{position:fixed; inset:0; background:rgba(15,30,60,.5); backdrop-filter:blur(3px); display:flex; align-items:flex-start; justify-content:center; padding:34px 16px; overflow:auto; z-index:50}
-.modal{background:var(--panel); border-radius:18px; width:100%; max-width:740px; overflow:hidden; box-shadow:0 20px 60px rgba(15,30,60,.3)}
-.mhead{background:linear-gradient(120deg,var(--navy),var(--navy2)); color:#fff; padding:22px 26px}
+.modal{background:var(--panel); border-radius:8px; width:100%; max-width:740px; overflow:hidden; box-shadow:0 20px 60px rgba(0,29,69,.28)}
+.mhead{background:var(--navy); color:#fff; padding:22px 26px; border-bottom:4px solid var(--blue)}
 .mhead h3{font-family:'Space Grotesk',sans-serif; font-size:19px; margin:0; font-weight:700}
 .mhead .csub{color:#a9b8df; font-size:12.5px; margin:3px 0 0}
 .close{float:right; background:rgba(255,255,255,.15); border:0; color:#fff; width:30px; height:30px; border-radius:9px; font-size:18px; cursor:pointer; line-height:1}
 .mbody{padding:22px 26px}
 .mk3{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:20px}
-.mk{background:var(--bg); border:1px solid var(--line); border-radius:12px; padding:13px}
+.mk{background:#F7F8FA; border:1px solid var(--line); border-radius:8px; padding:13px}
 .mk .v{font-family:'Space Grotesk',sans-serif; font-size:19px; font-weight:700}
 .mk .l{font-size:11px; color:var(--muted); margin-top:3px}
 .grid2{display:grid; grid-template-columns:1fr 1fr; gap:13px; margin-bottom:14px}
 label{display:block; font-size:11.5px; font-weight:600; color:var(--muted); margin-bottom:6px; text-transform:uppercase; letter-spacing:.4px}
-.fld{width:100%; border:1px solid var(--line); border-radius:10px; padding:10px 12px; font-size:13.5px; font-family:inherit; color:var(--ink); background:#fff}
+.fld{width:100%; border:1px solid #C8D2DF; border-radius:8px; padding:10px 12px; font-size:13.5px; font-family:inherit; color:var(--ink); background:#fff}
 .fld:focus{outline:none; border-color:var(--blue)}
 textarea.fld{min-height:92px; resize:vertical}
 .saverow{display:flex; gap:12px; justify-content:flex-end; align-items:center; margin-top:4px}
@@ -303,7 +307,7 @@ function aggregateKit(){
 }
 
 function renderSetupNeeded(){
-  app.innerHTML=`<div class="head"><div class="top"><div><h1>Control de Impagados</h1><p class="sub">Configuración pendiente</p></div></div></div>
+  app.innerHTML=`<div class="head"><div class="top"><div class="head-brand"><img src="./logo-playoff-white.svg" alt="Playoff"><div class="head-brand-copy"><h1>Control de Impagados</h1><p class="sub">Configuración pendiente</p></div></div></div></div>
   <div class="banner"><b>Falta configurar la conexión a Firebase.</b><br><br>
   Abre <code>firebase-config.js</code> y pega la configuración de tu aplicación web de Firebase.
   Tienes los pasos detallados en <code>CONFIGURACION.md</code>.</div>`;
@@ -364,7 +368,7 @@ function render(){
   const crit=agg.filter(c=>c.st==='crit').length;
   const maxdias=agg.length?Math.max(...agg.map(c=>c.maxdias)):0;
   const top=[...agg].sort((a,b)=>b.deuda-a.deuda).slice(0,8);
-  const fillFor=v=>{const t=v/max; const g=t>.66?'#E53E3E,#c0392b':t>.33?'#F6AD55,#e8893a':'#5b8def,#3b6fe0'; return `linear-gradient(90deg,${g})`;};
+  const fillFor=v=>{const t=v/max; const g=t>.66?'#E5484D,#C9363C':t>.33?'#F59E0B,#D98200':'#3B82F6,#1469E6'; return `linear-gradient(90deg,${g})`;};
   const tramos=[['0–100€',0,100],['100–250€',100,250],['250–500€',250,500],['500–1k€',500,1000],['>1k€',1000,1e12]];
   const dist=tramos.map(([l,a,b])=>({l,n:agg.filter(c=>c.deuda>=a&&c.deuda<b).length}));
   const distMax=Math.max(1,...dist.map(d=>d.n));
@@ -378,7 +382,10 @@ function render(){
   app.innerHTML=`
   <div class="head">
     <div class="top">
-      <div><h1>Control de Impagados</h1><p class="sub">Playoff Informàtica · seguimiento de cobros pendientes</p></div>
+      <div class="head-brand">
+        <img src="./logo-playoff-white.svg" alt="Playoff">
+        <div class="head-brand-copy"><h1>Control de Impagados</h1><p class="sub">Seguimiento de cobros pendientes</p></div>
+      </div>
       <div class="tools">
         ${uemail?`<span class="uemail">${uemail}</span>`:''}
         <button class="btn primary" id="up">Cargar Excel</button>
