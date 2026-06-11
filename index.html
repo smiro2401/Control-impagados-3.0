@@ -175,9 +175,11 @@ const norm=s=>(s||'').toString().trim();
 const key=s=>norm(s).toLowerCase().replace(/\s+/g,' ');
 const TODAY=new Date();
 const app=$('#app');
+const APP_VERSION='2026.06.11-shared-v2';
 
 let invoices=[], clients={}, q='', sortBy='deuda', sortDir=-1;
 let auth=null, db=null, user=null;
+let dataError='';
 let stopInvoices=null, stopClients=null;
 const SHARED_WORKSPACE='control-impagados';
 
@@ -227,7 +229,7 @@ async function afterLogin(){
 }
 
 async function loadData(){
-  invoices=[]; clients={};
+  invoices=[]; clients={}; dataError='';
   try{
     const inv = await getDocs(invoicesRef());
     invoices = inv.docs.map(snapshot=>snapshot.data());
@@ -236,22 +238,35 @@ async function loadData(){
       const data=snapshot.data();
       clients[data.clientKey]=data.profile;
     });
-  }catch(e){ console.error('loadData',e); }
+  }catch(e){
+    console.error('loadData',e);
+    dataError=`No se pudieron cargar los datos compartidos (${e.code||'error desconocido'}).`;
+  }
 }
 
 function startRealtime(){
   stopInvoices=onSnapshot(invoicesRef(),snapshot=>{
+    dataError='';
     invoices=snapshot.docs.map(item=>item.data());
     render();
-  },error=>console.error('invoices realtime',error));
+  },error=>{
+    console.error('invoices realtime',error);
+    dataError=`No se pudieron sincronizar las facturas (${error.code||'error desconocido'}).`;
+    render();
+  });
   stopClients=onSnapshot(clientsRef(),snapshot=>{
+    dataError='';
     clients={};
     snapshot.forEach(item=>{
       const data=item.data();
       clients[data.clientKey]=data.profile;
     });
     render();
-  },error=>console.error('clients realtime',error));
+  },error=>{
+    console.error('clients realtime',error);
+    dataError=`No se pudieron sincronizar los clientes (${error.code||'error desconocido'}).`;
+    render();
+  });
 }
 
 async function replaceInvoices(list){
@@ -433,6 +448,7 @@ function render(){
     </div>`:''}
   </div>
   <div class="wrap">
+  ${dataError?`<div class="banner"><b>Error de conexión.</b><br>${dataError}<br><span style="font-size:11px">Versión ${APP_VERSION}</span></div>`:''}
   ${invoices.length?`
     <div class="cols">
       <div class="section">
@@ -480,7 +496,8 @@ function render(){
       <div class="big">📊</div>
       <b>Aún no hay datos cargados</b><br><br>
       Pulsa <b>Cargar Excel</b> para importar tu listado de facturas pendientes desde Holded.<br>
-      <span style="font-size:12px">Los datos se guardan en la nube y se ven desde cualquier equipo. Las fichas de contacto se conservan al cargar un Excel nuevo.</span>
+      <span style="font-size:12px">Los datos se guardan en la nube y se comparten entre todos los usuarios. Las fichas de contacto se conservan al cargar un Excel nuevo.</span><br>
+      <span style="font-size:10px;color:#98a2b3">Versión ${APP_VERSION}</span>
     </div>
   `}
   </div>`;
