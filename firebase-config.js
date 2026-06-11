@@ -1,8 +1,8 @@
 export const firebaseConfig = {
-  apiKey: "PEGA_AQUI_API_KEY",
-  authDomain: "PEGA_AQUI_PROJECT_ID.firebaseapp.com",
-  projectId: "PEGA_AQUI_PROJECT_ID",
-  storageBucket: "PEGA_AQUI_PROJECT_ID.firebasestorage.app",
-  messagingSenderId: "PEGA_AQUI_MESSAGING_SENDER_ID",
-  appId: "PEGA_AQUI_APP_ID"
+  apiKey: "AIzaSyCJ0WKvZu0tNV8BKQ2TjOnkcnyikYDk5ps",
+  authDomain: "control-impagados-3-0.firebaseapp.com",
+  projectId: "control-impagados-3-0",
+  storageBucket: "control-impagados-3-0.firebasestorage.app",
+  messagingSenderId: "116912771220",
+  appId: "1:116912771220:web:de4fe973515597da956481"
 };
